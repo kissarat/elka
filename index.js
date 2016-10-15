@@ -78,7 +78,8 @@ class Elka {
 }
 
 if (module.parent) {
-  module.exports = Elka
+  module.exports = db
+  db.Elka = Elka
 }
 else {
   db.loadSchema().then(function () {

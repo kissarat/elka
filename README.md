@@ -1,4 +1,4 @@
 Elka - PostgreSQL Management Interface
 ======================================
 
-Please set KNEX environment variable
+Run run `node .` in `activate.sh` environment
