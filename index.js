@@ -4,6 +4,7 @@ const db = require('schema-db')
 const {parse} = require('querystring')
 const {resolve} = require('path')
 const {readFile} = require('fs')
+const {each} = require('lodash')
 
 function template(name, variables) {
   if (!template.cache) {
@@ -55,11 +56,27 @@ class Elka {
           else if (path && path[1] in db.entities) {
             const entity = db.entities[path[1]]
             const params = parse(req.url.split('?').slice(1).join('?'))
+            const references = {}
+            const objectFields = []
+            each(entity.fields, function ({type, reference}, name) {
+              if ('object' === type) {
+                objectFields.push(name)
+              }
+              if (reference && 'id' === reference.field) {
+                references[name] = reference.table
+              }
+            })
             entity
               .read(params)
               .then(function (rows) {
+                rows.forEach(function (row) {
+                  objectFields.forEach(function (name) {
+                    row[name] = JSON.stringify(row[name])
+                  })
+                })
                 res.end(template('table', {
                   name: entity.name,
+                  references,
                   params,
                   rows
                 }))

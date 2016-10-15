@@ -10,5 +10,9 @@ block body
         tbody
             each row in rows
                 tr
-                    each cell in row
-                        td #{cell}
+                    each value, key in row
+                        if references[key]
+                            td
+                                a(href='/elka/' + references[key] + '?id=' + value) #{value}
+                        else
+                            td #{value}
