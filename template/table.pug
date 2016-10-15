@@ -1,0 +1,14 @@
+extends layout
+
+block head
+    title #{name}
+
+block body
+    h1 #{name}
+    input(type='search', value=params.search)
+    table
+        tbody
+            each row in rows
+                tr
+                    each cell in row
+                        td #{cell}

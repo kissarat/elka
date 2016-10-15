@@ -1,0 +1,31 @@
+body {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+input {
+    margin: 0 auto 12px;
+}
+
+td {
+    padding: 4px 6px;
+    border-right: 1px solid black;
+    min-width: 60px;
+    text-align: left;
+}
+
+tr:nth-child(odd) > td {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+tr:hover > td {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+[type=search] {
+    display: none;
+}
