@@ -1,4 +1,4 @@
-const search = document.querySelector('[type=search]')
+const form = document.getElementById('search')
 
 const querystring = {
   parse(str, sep = '&', eq = '=') {
@@ -24,10 +24,11 @@ function getParams() {
   return _params;
 }
 
-if (search) {
-  search.addEventListener('keyup', _.debounce(function (e) {
+if (form) {
+  const search = form.querySelector('[type=search]')
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
     const params = getParams()
-    console.log(params)
     if (search.value) {
       params.search = search.value.trim()
     }
@@ -35,6 +36,8 @@ if (search) {
       delete params.search
     }
     location.search = '?' + querystring.stringify(params)
-  }, 600))
-  search.style.display = 'block'
+    return false
+  })
+  form.style.display = 'block'
+  search.focus()
 }

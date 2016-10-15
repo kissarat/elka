@@ -5,7 +5,9 @@ block head
 
 block body
     h1 #{name}
-    input(type='search', value=params.search)
+    form(id='search', method='post')
+        input(type='search', value=params.search)
+        button(type='submit') Search
     table
         tbody
             each row in rows
