@@ -41,7 +41,7 @@ class Elka {
             }
           }
           res.setHeader('content-type', mime + '; charset=utf-8')
-          const path = /\/elka\/([\w_]+)/.exec(req.url)
+          const path = /\/elka\/([\w._]+)/.exec(req.url)
           if (file) {
             readFile(__dirname + '/public' + req.url, function (err, content) {
               res.end(content)
